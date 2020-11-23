@@ -1,0 +1,102 @@
+body {
+  text-align: center;
+}
+
+.grid-container {
+  margin: auto;
+  height: 200px;
+  border: 1px solid black;
+  width: 50%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "player1score player1-0 player1-1 player1-2 player1-3 player1-4 player1-5 player2score"
+    "player1score player2-5 player2-4 player2-3 player2-2 player2-1 player2-0 player2score";
+}
+
+.player1score {
+  grid-area: player1score;
+  border: 1px solid black;
+  background-color: rgb(111, 201, 111);
+}
+
+.player1-0 {
+  grid-area: player1-0;
+  border: 1px solid black;
+  background-color: rgb(111, 201, 111);
+}
+
+.player1-1 {
+  grid-area: player1-1;
+  border: 1px solid black;
+  background-color: rgb(111, 201, 111);
+}
+
+.player1-2 {
+  grid-area: player1-2;
+  background-color: rgb(111, 201, 111);
+
+  border: 1px solid black;
+}
+
+.player1-3 {
+  grid-area: player1-3;
+  background-color: rgb(111, 201, 111);
+  border: 1px solid black;
+}
+
+.player1-4 {
+  grid-area: player1-4;
+  background-color: rgb(111, 201, 111);
+  border: 1px solid black;
+}
+
+.player1-5 {
+  grid-area: player1-5;
+  background-color: rgb(111, 201, 111);
+  border: 1px solid black;
+}
+
+.player2score {
+  grid-area: player2score;
+  background-color: orange;
+  border: 1px solid black;
+}
+
+.player2-5 {
+  grid-area: player2-5;
+  background-color: orange;
+  border: 1px solid black;
+}
+
+.player2-4 {
+  grid-area: player2-4;
+  background-color: orange;
+  border: 1px solid black;
+}
+
+.player2-3 {
+  grid-area: player2-3;
+  background-color: orange;
+  border: 1px solid black;
+}
+
+.player2-2 {
+  grid-area: player2-2;
+  background-color: orange;
+  border: 1px solid black;
+}
+
+.player2-1 {
+  grid-area: player2-1;
+  background-color: orange;
+  border: 1px solid black;
+}
+
+.player2-0 {
+  grid-area: player2-0;
+  background-color: orange;
+  border: 1px solid black;
+}
