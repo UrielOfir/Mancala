@@ -42,6 +42,7 @@ body {
 
 .player1score{
   grid-area: player1score;
+  padding-top: 100%;
 }
 
 .player1-0 {
@@ -77,6 +78,7 @@ body {
 
 .player2score {
   grid-area: player2score;
+  padding-top: 100%;
 }
 
 .player2-5 {
