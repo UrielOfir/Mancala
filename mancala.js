@@ -56,8 +56,8 @@ function updateBoard() {
         playersStonesView[i][j].style.cursor = "";
       }
     }
-  player1scorePot.innerHTML=players[0].score;
-  player2scorePot.innerHTML=players[1].score;
+  player1scorePot.innerHTML = players[0].score;
+  player2scorePot.innerHTML = players[1].score;
   turnEndUpdate();
 }
 
@@ -80,8 +80,8 @@ function updateCell(row, cell, timer, lastStone) {
         for (let j = 0; j < 6; j++) {
           setAttribute(playersStonesView[i][j]);
         }
-        setAttribute(player1scorePot);
-        setAttribute(player2scorePot);
+      setAttribute(player1scorePot);
+      setAttribute(player2scorePot);
     }
 
     cleanStyle();
@@ -93,11 +93,11 @@ function updateCell(row, cell, timer, lastStone) {
 
     if (cell == -1) {
       if (row == 0) {
-        player1scorePot.innerHTML=players[0].score;
+        player1scorePot.innerHTML = players[0].score;
         changStyle(player1scorePot);
       } else {
-        player2scorePot.innerHTML=players[1].score;
-         changStyle(player2scorePot);
+        player2scorePot.innerHTML = players[1].score;
+        changStyle(player2scorePot);
       }
     }
     if (lastStone == 1) {
@@ -128,6 +128,8 @@ function isGameOver() {
   if (gameOver) {
     for (let i = 0; i < 6; i++)
       players[otherPlayer].score += players[otherPlayer].stones[i];
+    for (let i = 0; i < 2; i++)
+      for (let j = 0; j < 6; j++) players[i].stones[j] = 0;
     if (players[0].score == players[1].score) {
       turnEnd = `There is a tie.`;
       turnEndUpdate();
@@ -137,6 +139,7 @@ function isGameOver() {
       turnEndUpdate();
     }
     grid.removeEventListener("click", play);
+
     button = document.createElement("button");
     button.innerHTML = "New Game";
     button.addEventListener(`click`, () => {
