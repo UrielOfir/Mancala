@@ -110,3 +110,13 @@ body {
   grid-area: player2-0;
 
 }
+
+/*TODO - example classes*/
+.active {
+  border: 4px dotted blue;
+  color: yellow;
+  fontWeight: bold;
+}
+.cell.active:hover {
+  cursor: pointer;
+}
