@@ -1,5 +1,6 @@
 const INITIAL_STONES_COUNT = 4;
 const NUMBER_OF_PLAYERS = 2;
+const NUMBER_OF_STONES = 6;
 
 let players = {
   0: { stones: [], score: 0 },
@@ -11,8 +12,8 @@ let grid = document.querySelector(".grid-container");
 let turnEnd = 1;
 let turnEndText = document.querySelector("#turn");
 
-let playersStonesView = { 0: [], 1: [] };
-const NUMBER_OF_STONES = 6;
+const playersStonesView = { 0: [], 1: [] };
+const playerArea = { 0: [], 1: [] };
 for (let i = 0; i < NUMBER_OF_PLAYERS; i++)
   for (let j = 0; j < NUMBER_OF_STONES; j++) {
     playersStonesView[i][j] = document.querySelector(`.player${i + 1}-${j}`);
@@ -50,13 +51,16 @@ function updateBoard() {
     for (let j = 0; j < NUMBER_OF_STONES; j++) {
       playersStonesView[i][j].innerHTML = players[i].stones[j];
       if (turnEnd === 1) {
-        playersStonesView[0][j].style.cursor = "pointer";
-        playersStonesView[1][j].style.cursor = "not-allowed";
+        playersStonesView[0][j].classList.remove("notReady");
+        playersStonesView[0][j].classList.add("ready");
+        playersStonesView[1][j].classList.add("notReady");
       } else if (turnEnd === NUMBER_OF_PLAYERS) {
-        playersStonesView[1][j].style.cursor = "pointer";
-        playersStonesView[0][j].style.cursor = "not-allowed";
+        playersStonesView[1][j].classList.remove("notReady");
+        playersStonesView[1][j].classList.add("ready");
+        playersStonesView[0][j].classList.add("notReady");
       } else {
-        playersStonesView[i][j].style.cursor = "";
+        playersStonesView[1][j].classList.remove("notReady");
+        playersStonesView[1][j].classList.remove("ready");
       }
     }
   player1scorePot.innerHTML = players[0].score;
@@ -66,42 +70,29 @@ function updateBoard() {
 
 function updateCell(row, cell, timer, lastStone) {
   setTimeout(() => {
-    function changStyle(element) {
-      // TODO - replace inline style with classes in css file and element.classList.add()
-      element.style.border = "4px dotted blue";
-      element.style.color = "color: yellow bold";
-      element.style.fontWeight = "bold";
-    }
-
     function cleanStyle() {
-      function resetInlineStylesOf(element) {
-        console.log(element);
-        element.style.border = "";
-        element.style.color = "";
-        element.style.fontWeight = "";
-      }
       for (let i = 0; i < NUMBER_OF_PLAYERS; i++)
         for (let j = 0; j < NUMBER_OF_STONES; j++) {
-          resetInlineStylesOf(playersStonesView[i][j]);
+          playersStonesView[i][j].classList.remove("active");
         }
-      resetInlineStylesOf(player1scorePot);
-      resetInlineStylesOf(player2scorePot);
+      player1scorePot.classList.remove("active");
+      player2scorePot.classList.remove("active");
     }
 
     cleanStyle();
 
     if (cell >= 0 && cell <= 5) {
       playersStonesView[row][cell].innerHTML = players[row].stones[cell];
-      changStyle(playersStonesView[row][cell]);
+      playersStonesView[row][cell].classList.add("active");
     }
 
     if (cell === -1) {
       if (row === 0) {
         player1scorePot.innerHTML = players[0].score;
-        changStyle(player1scorePot);
+        player1scorePot.classList.add("active");
       } else {
         player2scorePot.innerHTML = players[1].score;
-        changStyle(player2scorePot);
+        player2scorePot.classList.add("active");
       }
     }
     if (lastStone === 1) {
@@ -164,16 +155,16 @@ function checkGame() {
   if (totalStones !== 48) console.log("we have a problem");
 }
 
-turnEndText.addEventListener("click", function () {
-  for (let p = 0; p < 100; p++) {
-    setTimeout(() => {
-      let j = Math.floor(Math.random() * NUMBER_OF_STONES);
-      // TODO - rows is not declared - I think this will crash
-      rows[0].children[j].click();
-      rows[1].children[j].click();
-    }, 1000);
-  }
-});
+// A function to automatic run. Need repair.
+// turnEndText.addEventListener("click", function () {
+//   for (let p = 0; p < 100; p++) {
+//     setTimeout(() => {
+//       let j = Math.floor(Math.random() * NUMBER_OF_STONES);
+//       rows[0].children[j].click();
+//       rows[1].children[j].click();
+//     }, 1000);
+//   }
+// });
 
 function play(e) {
   let cell = parseInt(e.target.className.charAt(8));
@@ -186,9 +177,8 @@ function play(e) {
     let timer = 0;
     players[row].stones[cell] = 0;
     turnEnd = row === 0 ? NUMBER_OF_PLAYERS : 1;
-    // TODO - currentPlayer and otherPlayer are not declared
-    currentPlayer = row === 0 ? 0 : 1;
-    otherPlayer = row === 0 ? 1 : 0;
+    let currentPlayer = row === 0 ? 0 : 1;
+    let otherPlayer = row === 0 ? 1 : 0;
 
     updateCell(row, cell, timer, currentMoveStones);
     cell--;

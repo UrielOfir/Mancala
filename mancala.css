@@ -16,25 +16,12 @@ body {
     "player1score player2-5 player2-4 player2-3 player2-2 player2-1 player2-0 player2score";
 }
 
-.player1score,
-.player1-0,
-.player1-1,
-.player1-2,
-.player1-3,
-.player1-4,
-.player1-5 {
+.player1 {
   padding: 45%;
   border: 1px solid black;
   background-color: rgb(111, 201, 111);
 }
-.player2score,
-.player2-0,
-.player2-1,
-.player2-2,
-.player2-3,
-.player2-4,
-.player2-5,
-.player2score {
+.player2 {
   padding: 45%;
   background-color: orange;
   border: 1px solid black;
@@ -111,12 +98,14 @@ body {
 
 }
 
-/*TODO - example classes*/
 .active {
   border: 4px dotted blue;
   color: yellow;
-  fontWeight: bold;
+  font-weight: bold;
 }
-.cell.active:hover {
+.cell.ready:hover {
   cursor: pointer;
+}
+.cell.notReady:hover{
+  cursor: not-allowed;
 }
