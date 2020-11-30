@@ -1,3 +1,4 @@
+/******/ (() => { // webpackBootstrap
 const INITIAL_STONES_COUNT = 4;
 const NUMBER_OF_PLAYERS = 2;
 const NUMBER_OF_STONES = 6;
@@ -222,3 +223,6 @@ function play(e) {
     isGameOver();
   }
 }
+
+/******/ })()
+;
