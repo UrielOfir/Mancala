@@ -1,3 +1,4 @@
-
-Mancala/
 node_modules
+.idea
+*.iml
+
